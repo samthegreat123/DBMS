@@ -1,0 +1,223 @@
+
+SQL> CREATE TABLE ITEM_MASTER(
+  2  ID NUMBER PRIMARY KEY,
+  3  NAME VARCHAR2(20),
+  4  TYPE VARCHAR2(20),
+  5  PRICE NUMBER,
+  6  QUALITY VARCHAR2(20),
+  7  ITEM_PACK_DATE DATE
+  8  );
+
+Table created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(11,'DIARY MILK','CHOCHOLATE',500,'GOOD','12-AUG-2000');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(12,'KAJUKATRI','MITHAI',1000,'VERY GOOD','15-JAN-2016');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(13,'PIZZA','FAST FOOD',350,'AVERAGE','20-FEB-2015');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(14,'OGRANGEJUICE','JUICE',50,'BEST','05-FEB-2016');
+
+1 row created.
+
+SQL> INSERT INTO ITEM_MASTER VALUES(15,'VANILLA CACK','BACKERY ITEM',2000,'GOOD','01-JAN-2016');
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
+
+------Select information about price,quality and item_pack_date of the item. 
+
+SQL> SELECT PRICE,QUALITY,ITEM_PACK_DATE
+  2  FROM ITEM_MASTER;
+
+     PRICE QUALITY              ITEM_PACK                                       
+---------- -------------------- ---------                                       
+       500 GOOD                 12-AUG-00                                       
+      1000 VERY GOOD            15-JAN-16                                       
+       350 AVERAGE              20-FEB-15                                       
+        50 BEST                 05-FEB-16                                       
+      2000 GOOD                 01-JAN-16                                       
+-----Display information about item. 
+
+SQL> SELECT*FROM ITEM_MASTER;
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK                                                  
+-------------------- ---------                                                  
+        11 DIARY MILK           CHOCHOLATE                  500                 
+GOOD                 12-AUG-00                                                  
+                                                                                
+        12 KAJUKATRI            MITHAI                     1000                 
+VERY GOOD            15-JAN-16                                                  
+                                                                                
+        13 PIZZA                FAST FOOD                   350                 
+AVERAGE              20-FEB-15                                                  
+                                                                                
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK                                                  
+-------------------- ---------                                                  
+        14 OGRANGEJUICE         JUICE                        50                 
+BEST                 05-FEB-16                                                  
+                                                                                
+        15 VANILLA CACK         BACKERY ITEM               2000                 
+GOOD                 01-JAN-16                                                  
+                                                                                                                             
+                                                                                
+
+SQL> ---sort the item by its quality
+
+SQL> SELECT *
+  2  FROM ITEM_MASTER
+  3  ORDER BY QUALITY;
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE                                             
+-------------------- --------------------                                       
+        13 PIZZA                FAST FOOD                   350                 
+AVERAGE              20-FEB-15                                                  
+                                                                                
+        14 OGRANGEJUICE         JUICE                        50                 
+BEST                 05-FEB-16                                                  
+                                                                                
+        15 VANILLA CACK         BACKERY ITEM               2000                 
+GOOD                 01-JAN-16                                                  
+                                                                                
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE                                             
+-------------------- --------------------                                       
+        11 DIARY MILK           CHOCHOLATE                  500                 
+GOOD                 12-AUG-00                                                  
+                                                                                
+        12 KAJUKATRI            MITHAI                     1000                 
+VERY GOOD            15-JAN-16                                                  
+                                                                                
+
+SQL> ----Display quality with table with distinct values.
+
+SQL> SELECT DISTINCT QUALITY
+  2  FROM ITEM_MASTER;
+
+QUALITY                                                                         
+--------------------                                                            
+GOOD                                                                            
+VERY GOOD                                                                       
+AVERAGE                                                                         
+BEST                                                                            
+-----Change the quality of item from Good to Verygood. 
+
+SQL> UPDATE ITEM_MASTER
+  2  SET QUALITY='VERY GOOD'
+  3  WHERE QUALITY ='GOOD';
+
+2 rows updated.
+------Display item having quality Verygood.
+
+SQL> SELECT *
+  2  FROM ITEM_MASTER
+  3  WHERE QUALITY ='VERY GOOD';
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE                                             
+-------------------- --------------------                                       
+        11 DIARY MILK           CHOCHOLATE                  500                 
+VERY GOOD            12-AUG-00                                                  
+                                                                                
+        12 KAJUKATRI            MITHAI                     1000                 
+VERY GOOD            15-JAN-16                                                  
+                                                                                
+        15 VANILLA CACK         BACKERY ITEM               2000                 
+VERY GOOD            01-JAN-16                                                  
+                                                                                
+-----Add new columns item_pur_date into table.
+
+SQL> ALTER TABLE ITEM_MASTER
+  2  ADD ITEM_PUR_DATE DATE;
+
+Table altered.
+----Display all information of items having price more than Rs. 500. 
+
+SQL> SELECT*
+  2  FROM ITEM_MASTER
+  3  WHERE PRICE>500;
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE       ITEM_PUR_                             
+-------------------- -------------------- ---------                             
+        12 KAJUKATRI            MITHAI                     1000                 
+VERY GOOD            15-JAN-16                                                  
+                                                                                
+        15 VANILLA CACK         BACKERY ITEM               2000                 
+VERY GOOD            01-JAN-16                                                  
+                                                                                
+
+SQL> -- Delete the item having price of Rs. 50.
+
+SQL> DELETE FROM
+  2  ITEM_MASTER
+  3  WHERE PRICE = 50;
+
+1 row deleted.
+
+SQL> ----Rename table from person to Item_detail.
+SQL> RENAME NAME TO ITEM_DETAIL;
+RENAME NAME TO ITEM_DETAIL
+*
+ERROR at line 1:
+ORA-04043: object NAME does not exist 
+
+
+SQL> ALTER TABLE NAME RENAME TO ITEM_DETAIL;
+ALTER TABLE NAME RENAME TO ITEM_DETAIL
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> SELECT*FROM ITEM_MASTER;
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE       ITEM_PUR_                             
+-------------------- -------------------- ---------                             
+        11 DIARY MILK           CHOCHOLATE                  500                 
+VERY GOOD            12-AUG-00                                                  
+                                                                                
+        12 KAJUKATRI            MITHAI                     1000                 
+VERY GOOD            15-JAN-16                                                  
+                                                                                
+        13 PIZZA                FAST FOOD                   350                 
+AVERAGE              20-FEB-15                                                  
+                                                                                
+
+        ID NAME                 TYPE                      PRICE                 
+---------- -------------------- -------------------- ----------                 
+QUALITY              ITEM_PACK_DATE       ITEM_PUR_                             
+-------------------- -------------------- ---------                             
+        15 VANILLA CACK         BACKERY ITEM               2000                 
+VERY GOOD            01-JAN-16                                                  
+                                                                                
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
