@@ -1,0 +1,121 @@
+SQL> INSERT INTO Cust_master VALUES('C1','PRIYA','RINGROAD','PUJA PARK','AHMEDABAD','GUJARAT',8989878548 );
+
+1 row created.
+
+SQL> INSERT INTO Cust_master VALUES('C2','PUJA','LAJPAT NAGER','SHYMAL COLONY','BANARAS','UP',7898456213);
+
+1 row created.
+
+SQL> INSERT INTO Cust_master VALUES('C3','ANKIT','BORIVALI','PANCHAYAT NAGER','MUMBAI','MAHARASTRA',7885984251);
+
+1 row created.
+
+SQL> INSERT INTO Cust_master VALUES('C4','RAVI','VAJDI ROAD','NANDBOOMI COLONY','DEHLI','DEHLI',7898452034 );
+
+1 row created.
+
+SQL> INSERT INTO Cust_master VALUES('C5','ALPHA','JAMANAGER ROAD','RAILWAY COLONY','AHMENDABAD','GUJARAT',7465241589 );
+
+1 row created.
+                                                                                                            
+------Select information about all customers.
+SQL> set linesize 200
+SQL> SELECT * FROM Cust_master;
+
+CUST_NO              CUST_NAME            ADDRESS1             ADDRESS2             CITY                 STATE                     PH_NO                                                                
+-------------------- -------------------- -------------------- -------------------- -------------------- -------------------- ----------                                                                
+C1                   PRIYA                RINGROAD             PUJA PARK            AHMEDABAD            GUJARAT              8989878548                                                                
+C2                   PUJA                 LAJPAT NAGER         SHYMAL COLONY        BANARAS              UP                   7898456213                                                                
+C3                   ANKIT                BORIVALI             PANCHAYAT NAGER      MUMBAI               MAHARASTRA           7885984251                                                                
+C4                   RAVI                 VAJDI ROAD           NANDBOOMI COLONY     DEHLI                DEHLI                7898452034                                                                
+C5                   ALPHA                JAMANAGER ROAD       RAILWAY COLONY       AHMENDABAD           GUJARAT              7465241589                                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> ----Display the list of customers belonging to "Gujarat" state.
+SQL> SELECT CUST_NAME
+  2  FROM Cust_master
+  3  WHERE STATE ='GUJARAT';
+
+CUST_NAME                                                                                                                                                                                               
+--------------------                                                                                                                                                                                    
+PRIYA                                                                                                                                                                                                   
+ALPHA                                                                                                                                                                                                   
+
+SQL> ----Sort the customer by their customer name.
+
+SQL> SELECT *
+  2  FROM Cust_master
+  3  ORDER BY CUST_NAME ASC;
+
+CUST_NO              CUST_NAME            ADDRESS1             ADDRESS2             CITY                 STATE                     PH_NO                                                                
+-------------------- -------------------- -------------------- -------------------- -------------------- -------------------- ----------                                                                
+C5                   ALPHA                JAMANAGER ROAD       RAILWAY COLONY       AHMENDABAD           GUJARAT              7465241589                                                                
+C3                   ANKIT                BORIVALI             PANCHAYAT NAGER      MUMBAI               MAHARASTRA           7885984251                                                                
+C1                   PRIYA                RINGROAD             PUJA PARK            AHMEDABAD            GUJARAT              8989878548                                                                
+C2                   PUJA                 LAJPAT NAGER         SHYMAL COLONY        BANARAS              UP                   7898456213                                                                
+C4                   RAVI                 VAJDI ROAD           NANDBOOMI COLONY     DEHLI                DEHLI                7898452034                                                                
+
+SQL> ---- Display city from table with distinct values.
+SQL> SELECT DISTINCT CITY
+  2  FROM Cust_master;
+
+CITY                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+AHMEDABAD                                                                                                                                                                                               
+BANARAS                                                                                                                                                                                                 
+MUMBAI                                                                                                                                                                                                  
+DEHLI                                                                                                                                                                                                   
+AHMENDABAD                                                                                                                                                                                              
+
+SQL> ----Change the address1 of priya from "Ring Road" to "CG Road"
+SQL> UPDATE Cust_master
+  2  SET ADDRESS1='CG ROAD'
+  3  WHERE ADDRESS1='RINGROAD';
+
+1 row updated.
+
+SQL> ----Display city of customer whose state is Gujarat.
+SQL> SELECT CUST_NAME, CITY
+  2  FROM Cust_master
+  3  WHERE STATE ='GUJARAT';
+
+CUST_NAME            CITY                                                                                                                                                                               
+-------------------- --------------------                                                                                                                                                               
+PRIYA                AHMEDABAD                                                                                                                                                                          
+ALPHA                AHMENDABAD                                                                                                                                                                         
+
+SQL> ----Add new column pin_code into cust_master table.
+SQL> ALTER TABLE Cust_master
+  2  ADD PIN_CODE VARCHAR2(10);
+
+Table altered.
+
+SQL> ---- Drop column pin_code from table.
+SQL> ALTER TABLE Cust_master
+  2  DROP COLUMN PIN_CODE;
+
+Table altered.
+
+SQL> ------ Delete the customer having ph_no value '7898452034".
+  
+SQL> DELETE FROM Cust_master
+  2  WHERE PH_NO ='7898452034';
+
+1 row deleted.
+
+SQL> ---- Rename table from cust_master to customer_detail.
+
+
+SQL> ALTER TABLE Cust_master
+  2  RENAME TO CUSTOMER_DETAILS;
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
