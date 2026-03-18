@@ -1,0 +1,298 @@
+SQL> CREATE TABLE JOB(
+  2  JOB_ID NUMBER,
+  3  JOB_NAME VARCHAR2(20),
+  4  MIN_SAL NUMBER,
+  5  MAX_SAL NUMBER
+  6  );
+
+Table created.
+
+SQL> CREATE TABLE EMPLOYE(
+  2      EMP_NO NUMBER,
+  3      EMP_NAME VARCHAR2(20),
+  4      EMP_SAL NUMBER,
+  5      EMP_COM NUMBER NULL,
+  6      DEPT_NO NUMBER
+  7    );
+
+Table created.
+
+
+SQL> CREATE TABLE DEPOST(
+  2      A_NO NUMBER,
+  3      CNAME VARCHAR2(20),
+  4      BNAME VARCHAR2(20),
+  5      AMOUNT NUMBER,
+  6      ADATE VARCHAR2(20)
+  7      );
+
+Table created.
+
+SQL> INSERT INTO JOB VALUES(01,'PROGRAMMER',4000,10000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES(02,'MARKETING MANAGER',9000,15000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES(03,'FINANCE MANAGER',8200,12000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES(04,'ACCOUNT',4200,9000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES(05,'LECTURER',6000,17000);
+
+1 row created.
+
+SQL> INSERT INTO JOB VALUES(06,'COMPUTER OPERATOR',1500,3000);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(101,'SMITH',800,NULL,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(102,'SNEHAL',1600,300,25);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(103,'ADAMA',1100,0,20);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(104,'AMAN',3000,NULL,15);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(105,'ANITA',5000,5000,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(106,'SNEHA',2450,2450,10);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYE VALUES(107,'ANAMINKA',2975,NULL,30);
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(101,'ANIL','ADHERI',7000,'01-jan-06');
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(102,'SUNIL','VIRAR',5000,'15-jul-06 ');
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(103,'JAY','VILAPARRE',6500,'12-mar-06 ');
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(104,'VJAY','ANDHERI',8000,'17-sep-06 ');
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(105,'KEYUR','DADDAR',7500,'19-nov-06 ');
+
+1 row created.
+
+SQL> INSERT INTO DEPOST VALUES(106,'MAYUR','BORIVALI',5500,'21-dec-06 ');
+
+1 row created.
+
+SQL> ----Retrieve all data from employee, jobs and deposit.
+SQL> SELECT * FROM EMPLOYE;
+
+    EMP_NO EMP_NAME                EMP_SAL    EMP_COM    DEPT_NO                
+---------- -------------------- ---------- ---------- ----------                
+       101 SMITH                       800                    20                
+       102 SNEHAL                     1600        300         25                
+       103 ADAMA                      1100          0         20                
+       104 AMAN                       3000                    15                
+       105 ANITA                      5000       5000         10                
+       106 SNEHA                      2450       2450         10                
+       107 ANAMINKA                   2975                    30                
+
+7 rows selected.
+
+SQL> SELECT * FROM JOB;
+
+    JOB_ID JOB_NAME                MIN_SAL    MAX_SAL                           
+---------- -------------------- ---------- ----------                           
+         1 PROGRAMMER                 4000      10000                           
+         2 MARKETING MANAGER          9000      15000                           
+         3 FINANCE MANAGER            8200      12000                           
+         4 ACCOUNT                    4200       9000                           
+         5 LECTURER                   6000      17000                           
+         6 COMPUTER OPERATOR          1500       3000                           
+
+6 rows selected.
+
+SQL> SELECT * FROM DEPOST;
+
+      A_NO CNAME                BNAME                    AMOUNT                 
+---------- -------------------- -------------------- ----------                 
+ADATE                                                                           
+--------------------                                                            
+       101 ANIL                 ADHERI                     7000                 
+01-jan-06                                                                       
+                                                                                
+       102 SUNIL                VIRAR                      5000                 
+15-jul-06                                                                       
+                                                                                
+       103 JAY                  VILAPARRE                  6500                 
+12-mar-06                                                                       
+                                                                                
+
+      A_NO CNAME                BNAME                    AMOUNT                 
+---------- -------------------- -------------------- ----------                 
+ADATE                                                                           
+--------------------                                                            
+       104 VJAY                 ANDHERI                    8000                 
+17-sep-06                                                                       
+                                                                                
+       105 KEYUR                DADDAR                     7500                 
+19-nov-06                                                                       
+                                                                                
+       106 MAYUR                BORIVALI                   5500                 
+21-dec-06                                                                       
+                                                                                
+
+6 rows selected.
+
+SQL> SET LINESIZE 200;
+SQL> SELECT * FROM DEPOST;
+
+      A_NO CNAME                BNAME                    AMOUNT ADATE                                                                                                                                   
+---------- -------------------- -------------------- ---------- --------------------                                                                                                                    
+       101 ANIL                 ADHERI                     7000 01-jan-06                                                                                                                               
+       102 SUNIL                VIRAR                      5000 15-jul-06                                                                                                                               
+       103 JAY                  VILAPARRE                  6500 12-mar-06                                                                                                                               
+       104 VJAY                 ANDHERI                    8000 17-sep-06                                                                                                                               
+       105 KEYUR                DADDAR                     7500 19-nov-06                                                                                                                               
+       106 MAYUR                BORIVALI                   5500 21-dec-06                                                                                                                               
+
+6 rows selected.
+
+SQL> ----Give details of account no. and deposited rupees of customers having
+SQL> -----account opened between dates 01-01-06 and 25-07-06.
+SQL> SELECT A_NO, AMOUNT
+  2  FROM DEPOST
+  3  WHERE ADATE BETWEEN '01-01-06' AND '25-07-06';
+
+      A_NO     AMOUNT                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+       101       7000                                                                                                                                                                                   
+       102       5000                                                                                                                                                                                   
+       103       6500                                                                                                                                                                                   
+       104       8000                                                                                                                                                                                   
+       105       7500                                                                                                                                                                                   
+       106       5500                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL> ---Display all jobs with minimum salary is greater than 4000.
+SQL> SELECT *
+  2  FROM JOB
+  3  WHERE MIN_SAL > 4000;
+
+    JOB_ID JOB_NAME                MIN_SAL    MAX_SAL                                                                                                                                                   
+---------- -------------------- ---------- ----------                                                                                                                                                   
+         2 MARKETING MANAGER          9000      15000                                                                                                                                                   
+         3 FINANCE MANAGER            8200      12000                                                                                                                                                   
+         4 ACCOUNT                    4200       9000                                                                                                                                                   
+         5 LECTURER                   6000      17000                                                                                                                                                   
+
+SQL> ---- Display name and salary of employee whose department no is 20. Give
+SQL> ----alias name to name of employee.
+SQL> SELECT EMP_NAME AS NAME, EMP_SAL
+  2  FROM EMPLOYE
+  3  WHERE DEPT_NO = 20;
+
+NAME                    EMP_SAL                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+SMITH                       800                                                                                                                                                                         
+ADAMA                      1100                                                                                                                                                                         
+
+SQL> ----Display employee number,name and department details of those
+SQL> -----employee whose department lies in(10,20).
+
+SQL> SELECT EMP_NO,EMP_NAME,DEPT_NO
+  2  FROM EMPLOYE
+  3  WHERE DEPT_NO BETWEEN 10 AND 20;
+
+    EMP_NO EMP_NAME                DEPT_NO                                                                                                                                                              
+---------- -------------------- ----------                                                                                                                                                              
+       101 SMITH                        20                                                                                                                                                              
+       103 ADAMA                        20                                                                                                                                                              
+       104 AMAN                         15                                                                                                                                                              
+       105 ANITA                        10                                                                                                                                                              
+       106 SNEHA                        10                                                                                                                                                              
+
+SQL> ---Display all employee whose name start with ,A".
+SQL> SELECT EMP_NAME
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE 'A%';
+
+EMP_NAME                                                                                                                                                                                                
+--------------------                                                                                                                                                                                    
+ADAMA                                                                                                                                                                                                   
+AMAN                                                                                                                                                                                                    
+ANITA                                                                                                                                                                                                   
+ANAMINKA                                                                                                                                                                                                
+
+SQL> ---Display all employee whose third character is ,a".
+SQL> SELECT EMP_NAME
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE '__a%';
+
+no rows selected
+
+SQL> ---Display all employee whose name start with ,A" and third character is ,a"
+SQL> SELECT EMP_NAME
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE 'A_a%';
+
+no rows selected
+
+SQL> ----Display name, number and salary of those employees whose name is 5
+SQL> -----characters long
+
+SQL> SELECT EMP_NAME, EMP_NO, EMP_SAL
+  2  FROM EMPLOYE
+  3  WHERE LENGTH(EMP_NAME) = 5;
+
+EMP_NAME                 EMP_NO    EMP_SAL                                                                                                                                                              
+-------------------- ---------- ----------                                                                                                                                                              
+SMITH                       101        800                                                                                                                                                              
+ADAMA                       103       1100                                                                                                                                                              
+ANITA                       105       5000                                                                                                                                                              
+SNEHA                       106       2450                                                                                                                                                              
+
+SQL> ---- Sort and display the names of customers from deposit table.
+
+
+SQL> SELECT CNAME
+  2  FROM DEPOST
+  3  ORDER BY CNAME DESC;
+
+CNAME                                                                                                                                                                                                   
+--------------------                                                                                                                                                                                    
+VJAY                                                                                                                                                                                                    
+SUNIL                                                                                                                                                                                                   
+MAYUR                                                                                                                                                                                                   
+KEYUR                                                                                                                                                                                                   
+JAY                                                                                                                                                                                                     
+ANIL                                                                                                                                                                                                    
+
+6 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> SPOOL OFF;
