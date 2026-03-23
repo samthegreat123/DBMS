@@ -1,0 +1,157 @@
+SQL> ----1. Retrieve all data from employee, jobs and deposit.
+SQL> SELECT *
+  2  FROM EMPLOYEE;
+
+no rows selected
+
+SQL> SELECT *
+  2  FROM JOBS;
+FROM JOBS
+
+
+SQL> SELECT *
+  2  FROM JOB;
+
+    JOB_ID JOB_NAME                MIN_SAL    MAX_SAL
+---------- -------------------- ---------- ----------
+         1 PROGRAMMER                 4000      10000
+         2 MARKETING MANAGER          9000      15000
+         3 FINANCE MANAGER            8200      12000
+         4 ACCOUNT                    4200       9000
+         5 LECTURER                   6000      17000
+         6 COMPUTER OPERATOR          1500       3000
+
+6 rows selected.
+
+SQL> SELECT *
+  2  FROM DEPOSIT;
+
+ACTNO CNAME           BNAME               AMOUNT ADATE
+----- --------------- --------------- ---------- ---------
+100   ANIL            VRCE                  1000 01-MAR-95
+101   SUNIL           AJNI                  5000 04-JAN-96
+102   MEHUL           KAROLBAGH             3500 17-NOV-95
+104   MADHURI         CHANDI                1200 17-DEC-95
+105   PRMOD           M G ROAD              3000 27-MAR-96
+106   SANDIP          ANDEHRI               2000 31-MAR-96
+107   SHIVANI         VIRAH                 1000 05-SEP-95
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95
+109   MINU            POWAI                 7000 10-AUG-95
+
+9 rows selected.
+
+SQL> ----2. Give details of account no. and deposited rupees of customers having
+SQL> -----account opened between dates 01-01-06 and 25-07-06.
+SQL> 
+
+SQL> SELECT ACTNO, AMOUNT
+  2  FROM DEPOSIT
+  3  WHERE ADATE BETWEEN TO_DATE('01-01-2006','DD-MM-YYYY')
+  4                  AND TO_DATE('05-07-2006','DD-MM-YYYY');
+
+no rows selected
+
+SQL> -----3. Display all jobs with minimum salary is greater than 4000.
+SQL> SELECT JOB_NAME
+  2  FROM JOB
+  3  WHERE MIN_SAL > 4000;
+
+JOB_NAME
+--------------------
+MARKETING MANAGER
+FINANCE MANAGER
+ACCOUNT
+LECTURER
+
+SQL> ----Display name and salary of employee whose department no is 20. Give
+SQL> -----alias name to name of employee.
+
+SQL> SELECT EMP_NAME AS EMPLOYEE_NAME, EMP_SAL
+  2  FROM EMPLOYE
+  3  WHERE DEPT_NO = 20;
+
+EMPLOYEE_NAME           EMP_SAL
+-------------------- ----------
+SMITH                       800
+ADAMA                      1100
+
+SQL> ----5. Display employee number,name and department details of those
+SQL> ----employee whose department lies in(10,20).
+SQL> SELECT EMP_NO, EMP_NAME
+  2      FROM EMPLOYE
+  3      WHERE DEPT_NO BETWEEN 10 AND 20;
+
+    EMP_NO EMP_NAME
+---------- --------------------
+       101 SMITH
+       103 ADAMA
+       104 AMAN
+       105 ANITA
+       106 SNEHA
+
+SQL> --- Display all employee whose name start with „A‟.
+SQL> SELECT *
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE 'A%';
+
+    EMP_NO EMP_NAME                EMP_SAL    EMP_COM    DEPT_NO
+---------- -------------------- ---------- ---------- ----------
+       103 ADAMA                      1100          0         20
+       104 AMAN                       3000                    15
+       105 ANITA                      5000       5000         10
+       107 ANAMINKA                   2975                    30
+
+SQL> ---- Display all employee whose third character is „a‟.
+SQL> SELECT *
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE '__a%';
+
+no rows selected
+
+SQL> ----Display all employee whose name start with „A‟ and third character is „a‟
+
+SQL> SELECT *
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE 'A_a%';
+
+no rows selected
+
+SQL> ---Display name, number and salary of those employees whose name is 5
+SQL> ----characters long
+SQL> SELECT EMP_NAME, EMP_NO, EMP_SAL
+  2  FROM EMPLOYE
+  3  WHERE LENGTH(EMP_NAME) = 5;
+
+EMP_NAME                 EMP_NO    EMP_SAL
+-------------------- ---------- ----------
+SMITH                       101        800
+ADAMA                       103       1100
+ANITA                       105       5000
+SNEHA                       106       2450
+
+SQL> -----10. Sort and display the names of customers from deposit table.
+SQL> SELECT *
+  2  SELECT CNAME
+  3  SELECT *
+  4  FROM DEPOST
+  5  ORDER BY CNAME;
+
+
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  ORDER BY CNAME;
+
+CNAME
+---------------
+ANIL
+KRANTI
+MADHURI
+MEHUL
+MINU
+PRMOD
+SANDIP
+SHIVANI
+SUNIL
+
+9 rows selected.
+
