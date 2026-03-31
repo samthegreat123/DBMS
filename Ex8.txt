@@ -1,0 +1,116 @@
+SQL> ---List total deposit from deposit.
+SQL> SELECT SUM(AMOUNT)
+  2  FROM DEPOST;
+
+SUM(AMOUNT)                                                                     
+-----------                                                                     
+      39500                                                                     
+
+SQL> ---List total loan from karolbagh branch.
+
+SQL> SELECT SUM(AMOUNT)
+  2  FROM BORROW
+  3  WHERE BNAME ='KAROLBAGH';
+
+SUM(AMOUNT)                                                                     
+-----------                                                                     
+                                                                                
+
+SQL> --- Give maximum loan from branch vrce.
+SQL> SELECT MAX(AMOUNT)
+  2  FROM BORROW
+  3  WHERE BNAME='VRCE';
+
+MAX(AMOUNT)                                                                     
+-----------                                                                     
+       1000                                                                     
+
+SQL> ---Count total number of customers .
+
+SQL> SELECT COUNT(*)
+
+SQL> SELECT COUNT(*)
+  2  FROM CUSTOMERS;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         9                                                                      
+
+SQL> ---Count total number of customer"s cities.
+SQL> SELECT COUNT(CITY)A
+  2  FROM CUSTOMERS;
+
+         A                                                                      
+----------                                                                      
+         9                                                                      
+
+SQL> ---Create table supplier from employee with all the columns.
+SQL> CREATE TABLE SUPPLIER AS
+  2  SELECT *
+  3  FROM EMPLOYEE;
+
+Table created.
+
+SQL> ----Create table sup1 from employee with first two columns.
+
+SQL> CREATE TABLE SUP1 AS
+  2  SELECT EMP_NO, EMP_NAME
+  3  FROM EMPLOYE;
+
+Table created.
+
+SQL> ---Create table sup2 from employee with no data.
+SQL> CREATE TABLE SUP2 AS
+  2  SELECT *
+  3  FROM EMPLOYEE
+  4  WHERE 1=0;
+
+Table created.
+
+
+SQL> Insert the data into sup2 from employee whose second character should be ,n" and string
+  SQL>  ----should be 5 characters long in employee name field.
+ 
+SQL> INSERT INTO SUP2
+  2  SELECT *
+  3  FROM EMPLOYE
+  4  WHERE EMP_NAME LIKE '_n%'
+  5  AND LENGTH(EMP_NAME) = 2;
+
+SQL> -----. Delete all the rows from sup1.
+SQL> DELETE FROM SUP1;
+
+7 rows deleted.
+
+SQL> ----- Delete the detail of supplier whose sup_no is 103.
+
+SQL> DELETE FROM SUPPLIER
+  2  WHERE EMP_NO ='103';
+
+
+SQL> --- Rename the table sup2 to suplier_two.
+SQL> RENAME SUP2 TO SUPPLIER_TWO;
+
+Table renamed.
+
+SQL> ---. Destroy table sup1 with all the data.
+SQL> DROP TABLE SUP1;
+
+Table dropped.
+
+SQL> ---. Update the value dept_no to 10 where second character of emp. name is ,m".
+
+SQL> UPDATE EMPLOYE
+  2  SET DEPT_NO = 10
+  3  WHERE EMP_NAME LIKE '_m%';
+
+0 rows updated.
+
+SQL> ---Update the value of employee name whose employee number is 103.
+SQL> UPDATE EMPLOYE
+  2  SET EMP_NAME = 'NEWNAME'
+  3  WHERE EMP_NO = 103;
+
+1 row updated.
+
+SQL> SPOOL OFF;
