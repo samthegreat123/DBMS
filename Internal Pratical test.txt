@@ -1,0 +1,229 @@
+SQL>----1.List all data from the DEPOSIT table.
+SQL>
+SQL> SELECT * FROM DEPOSIT;
+ACTNO CNAME           BNAME               AMOUNT ADATE                          
+----- --------------- --------------- ---------- ---------                      
+100   ANIL            VRCE                  1000 01-MAR-95                      
+101   SUNIL           AJNI                  5000 04-JAN-96                      
+102   MEHUL           KAROLBAGH             3500 17-NOV-95                      
+104   MADHURI         CHANDI                1200 17-DEC-95                      
+105   PRMOD           M G ROAD              3000 27-MAR-96                      
+106   SANDIP          ANDEHRI               2000 31-MAR-96                      
+107   SHIVANI         VIRAH                 1000 05-SEP-95                      
+108   KRANTI          NEHRU PLACE           5000 02-JUL-95                      
+109   MINU            POWAI                 7000 10-AUG-95                      
+
+9 rows selected.
+
+SQL>---2.Display th account number and amount of all depositors from DEPOSIT table.
+SQL> SELECT ACTNO,AMOUNT
+  2  FROM DEPOSIT;
+
+ACTNO     AMOUNT                                                                
+----- ----------                                                                
+100         1000                                                                
+101         5000                                                                
+102         3500                                                                
+104         1200                                                                
+105         3000                                                                
+106         2000                                                                
+107         1000                                                                
+108         5000                                                                
+109         7000                                                                
+
+9 rows selected.
+
+SQL>---3.Display name of all customers from the table who live in BOMbay.
+SQL> SELECT CNAME
+  2  FROM CUSTOMERS
+  3  WHERE CITY = 'BOMBAY CITY';
+
+no rows selected
+
+SQL>---4.Display all items from item_master where price is more than Rs.500.
+SQL> SELECT*
+  2  FROM ITEM_MASTER
+  3  WHERE PRICE>500;
+
+        ID NAME                 TYPE                      PRICE                
+---------- -------------------- -------------------- ----------                
+QUALITY              ITEM_PACK_DATE       ITEM_PUR_                            
+-------------------- -------------------- ---------                            
+        12 KAJUKATRI            MITHAI                     1000                
+VERY GOOD            15-JAN-16                                                  
+                                                                               
+        15 VANILLA CACK         BACKERY ITEM               2000                
+VERY GOOD            01-JAN-16
+
+SQL>----5.Display  distinct city values from cust_master table.
+SQL> SELECT DISTINCT CITY
+  2  FROM Cust_master;
+
+CITY                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+AHMEDABAD                                                                                                                                                                                              
+BANARAS                                                                                                                                                                                                
+MUMBAI                                                                                                                                                                                                  
+DEHLI                                                                                                                                                                                                  
+AHMENDABAD
+
+SQL----6.Display  the name of depositors having amount than Rs.400 from the Deposit table.
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE AMOUNT > 4000;
+
+CNAME                                                                          
+---------------                                                                
+SUNIL                                                                          
+KRANTI                                                                          
+MINU
+
+ SQL>------ 7. Display all employess from the EMPLOYEE table whose name starts with the letter 'A'.
+SQL> SELECT EMP_NAME
+  2  FROM EMPLOYE
+  3  WHERE EMP_NAME LIKE 'A%';
+
+EMP_NAME                                                                                                                                                                                                
+--------------------                                                                                                                                                                                    
+ADAMA                                                                                                                                                                                                  
+AMAN                                                                                                                                                                                                    
+ANITA                                                                                                                                                                                                  
+ANAMINKA                                                                                                                                                                                                
+SQL>----8. Display the name and salary of employees whose department number is 20. Give an alias name to the employee name column.
+SQL> SELECT EMP_NAME AS NAME, EMP_SAL
+  2  FROM EMPLOYE
+  3  WHERE DEPT_NO = 20;
+
+NAME                    EMP_SAL                                                                                                                                                                        
+-------------------- ----------                                                                                                                                                                        
+SMITH                       800                                                                                                                                                                        
+ADAMA                      1100  
+
+ SQL>----9.Display all Job from the JOB table where minimium salary is greater than 4000.
+  SQL> SELECT *
+  2  FROM JOB
+  3  WHERE MIN_SAL > 4000;
+
+    JOB_ID JOB_NAME                MIN_SAL    MAX_SAL                                                                                                                                                   
+---------- -------------------- ---------- ----------                                                                                                                                                   
+         2 MARKETING MANAGER          9000      15000                                                                                                                                                   
+         3 FINANCE MANAGER            8200      12000                                                                                                                                                   
+         4 ACCOUNT                    4200       9000                                                                                                                                                   
+         5 LECTURER                   6000      17000 
+
+SQL>---10 Display account number and amount of customers from the DEPOSIT (Practical 6) table who opened 
+    SQL>---their account between 01-01-06 and 25-07-06. 
+    SQL> SELECT A_NO, AMOUNT
+  2  FROM DEPOST
+  3  WHERE ADATE BETWEEN '01-01-06' AND '25-07-06';
+
+      A_NO     AMOUNT                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+       101       7000                                                                                                                                                                                   
+       102       5000                                                                                                                                                                                   
+       103       6500                                                                                                                                                                                   
+       104       8000                                                                                                                                                                                   
+       105       7500                                                                                                                                                                                   
+       106       5500                                                                                                                                                                                   
+
+6 rows selected.
+
+SQL>---11.Perform the following on the item_master table: 
+   SQL>----(a) Change the quality of all items from 'Good' to 'Verygood'.
+   SQL> UPDATE ITEM_MASTER
+  2  SET QUALITY='VERY GOOD'
+  3  WHERE QUALITY ='GOOD';
+
+2 rows updated.
+ SQL>----(b) Delete the item having price Rs. 50. 
+ SQL> DELETE FROM
+  2  ITEM_MASTER
+  3  WHERE PRICE = 50;
+
+1 row deleted.
+
+SQL>-----12.Perform the following on the Cust_master table: 
+SQL>----(a) Change Address1 of 'Priya' from 'Ring Road' to 'CG Road'. 
+SQL> UPDATE Cust_master
+  2  SET ADDRESS1='CG ROAD'
+  3  WHERE ADDRESS1='RINGROAD';
+
+1 row updated.
+
+SQL>----13.(b) Delete the customer having phone number '7898452034'. 
+SQL> DELETE FROM Cust_master
+  2  WHERE PH_NO ='7898452034';
+
+1 row deleted.
+
+SQL>---13. Perform the following on the Person table: 
+SQL>---(a) Change the city of 'Sandip' from 'Pune' to 'Kolkata'.
+SQL> UPDATE PERSON
+  2  SET CITY='KOLKATA'
+  3  WHERE FNAME ='SANDIP';
+
+1 row updated.
+ 
+SQL>---(b) Display all persons having salary more than 6000. 
+SQL> SELECT *
+  2  FROM PERSON
+  3  WHERE SALARY > 6000;
+
+        ID FNAME                LNAME                CITY                     SALARY STATE                BIRTHDATE               PINCODE                                                               
+---------- -------------------- -------------------- -------------------- ---------- -------------------- -------------------- ----------                                                               
+         1 SNEHA                SHETH                RAJKOT                    10000                                                                                                                    
+         3 RIYA                 GAJAR                PUNE                       8000                                                                                                                    
+         5 ALPESH               PRAJAPATI            MUMBAI                    20000                                                                                                                    
+
+SQL>----14.Perform the following on the Bank_Branch table: 
+SQL>----(a) Sort and display all branch records by Branch_name.
+SQL> SELECT *
+  2  FROM BANK_BRANCH
+  3  ORDER BY BRANCH_NAME;
+
+ BRANCH_ID BRANCH_NAME          BRANCH_ADDRESS       BRANCH_CITY          BRANCH_STATE         BRANCH_OPEN_DATE                                                                                         
+---------- -------------------- -------------------- -------------------- -------------------- --------------------                                                                                     
+         1 BOI                  JAGNATHROAD          RAJKOT               GUJARAT              22-mar-2015                                                                                              
+         4 DENA BANK            CG ROAD              AHMENDABAD           GUJARAT              20-sep-2012                                                                                              
+         3 HDFC                 AGRA ROAD            AGRA                 UP                   04-feb-1998                                                                                              
+         5 ICICI                MAJAVDIROAD          JUNAGATH             GUJARAT              07-may-2011                                                                                              
+         2 SBI                  Boriwali Road        MUMBAI               Maharashtra          12-jan-2000                                                                                              
+
+ 
+SQL>----(b) Display Branch_name, Branch_address, and Branch_city only.
+SQL> SELECT BRANCH_NAME, BRANCH_ADDRESS, BRANCH_CITY
+  2  FROM BANK_BRANCH;
+
+BRANCH_NAME          BRANCH_ADDRESS       BRANCH_CITY                                                                                                                                                   
+-------------------- -------------------- --------------------                                                                                                                                          
+BOI                  JAGNATHROAD          RAJKOT                                                                                                                                                        
+SBI                  Boriwali Road        MUMBAI                                                                                                                                                        
+HDFC                 AGRA ROAD            AGRA                                                                                                                                                          
+DENA BANK            CG ROAD              AHMENDABAD                                                                                                                                                    
+ICICI                MAJAVDIROAD          JUNAGATH  
+
+SQL>----15.Write the following aggregate queries: 
+SQL>----(a) Find the total deposit amount from the DEPOSIT table (Practical 1). 
+SQL> SELECT SUM(AMOUNT)
+  2  FROM DEPOST;
+
+SUM(AMOUNT)                                                                     
+-----------                                                                     
+      39500
+SQL>-----(b) Count the total number of customers from the CUSTOMERS table.
+SQL> SELECT COUNT(*)
+
+SQL> SELECT COUNT(*)
+  2  FROM CUSTOMERS;
+
+  COUNT(*)                                                                      
+----------                                                                      
+         9   
+
+
+
+
+ 
+ 
+
+  
