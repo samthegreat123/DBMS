@@ -1,0 +1,124 @@
+SQL> ---Give name of customers who are depositors having same branch city of mr.sunil.
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE BNAME = (
+  4      SELECT BNAME
+  5      FROM DEPOSIT
+  6      WHERE CNAME = 'SUNIL'
+  7  );
+
+CNAME
+--------------------
+SUNIL
+ANIL
+
+SQL> ---Give deposit details and loan details of customer in same city where pramod is living.
+SQL> SELECT D.CNAME, D.AMOUNT, L.AMOUNT
+  2  FROM DEPOSIT D, BORROW L, CUSTOMERS C
+  3  WHERE D.CNAME = L.CNAME
+  4  AND D.CNAME = C.CNAME
+  5  AND C.CITY = (
+  6      SELECT CITY
+  7      FROM CUSTOMERS
+  8      WHERE CNAME = 'PRAMOD'
+  9  );
+
+CNAME      AMOUNT     AMOUNT
+---------- ---------- ----------
+PRAMOD     5000       2000
+RAVI       3000       1500
+
+SQL> ---Employees earning more than average salary.
+SQL> SELECT EMP_NO, EMP_NAME
+  2  FROM EMPLOYE
+  3  WHERE SALARY > (SELECT AVG(SALARY) FROM EMPLOYE)
+  4  ORDER BY SALARY ASC;
+
+EMP_NO     EMP_NAME
+---------- --------------------
+102        ANIL
+105        RAVI
+
+SQL> ---Display employees who report to Ford.
+SQL> SELECT EMP_NAME, SALARY
+  2  FROM EMPLOYE
+  3  WHERE MANAGER_ID = (
+  4      SELECT EMP_NO
+  5      FROM EMPLOYE
+  6      WHERE EMP_NAME = 'FORD'
+  7  );
+
+EMP_NAME    SALARY
+---------- ----------
+SMITH       3000
+ALLEN       2500
+
+SQL> ---Employees in Accounting department.
+SQL> SELECT E.DEPT_NO, E.EMP_NAME, E.JOB
+  2  FROM EMPLOYE E, DEPARTMENT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND D.DEPT_NAME = 'ACCOUNTING';
+
+DEPT_NO     EMP_NAME      JOB
+---------- ---------------- ----------
+10          SMITH         CLERK
+10          ALLEN         MANAGER
+
+SQL> ---Customers who are borrowers and depositors in Nagpur.
+SQL> SELECT CNAME
+  2  FROM DEPOSIT
+  3  WHERE CNAME IN (SELECT CNAME FROM BORROW)
+  4  AND CNAME IN (
+  5      SELECT CNAME
+  6      FROM CUSTOMERS
+  7      WHERE CITY = 'NAGPUR'
+  8  );
+
+CNAME
+--------------------
+ANIL
+
+SQL> ---Display city from table with distinct values.
+SQL> SELECT DISTINCT CITY
+  2  FROM CUSTOMERS;
+
+CITY
+--------------------
+AHMEDABAD
+MUMBAI
+DELHI
+NAGPUR
+
+SQL> ---Employee name, dept no and dept name.
+SQL> SELECT E.EMP_NAME, E.DEPT_NO, D.DEPT_NAME
+  2  FROM EMPLOYE E, DEPARTMENT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO;
+
+EMP_NAME     DEPT_NO     DEPT_NAME
+------------- ---------- --------------------
+SMITH         10          ACCOUNTING
+ALLEN         20          SALES
+
+SQL> ---Unique jobs in department 30 with location.
+SQL> SELECT DISTINCT E.JOB, D.LOCATION
+  2  FROM EMPLOYE E, DEPARTMENT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND E.DEPT_NO = 30;
+
+JOB        LOCATION
+---------- --------------------
+CLERK      CALCUTTA
+MANAGER    CALCUTTA
+
+SQL> ---Employees working in CALCUTTA.
+SQL> SELECT E.EMP_NAME, E.DEPT_NO, D.DEPT_NAME
+  2  FROM EMPLOYE E, DEPARTMENT D
+  3  WHERE E.DEPT_NO = D.DEPT_NO
+  4  AND D.LOCATION = 'CALCUTTA';
+
+EMP_NAME     DEPT_NO     DEPT_NAME
+------------- ---------- --------------------
+RAVI          30          SALES
+ANIL          30          SALES
+
+SQL> SPOOL OFF;
